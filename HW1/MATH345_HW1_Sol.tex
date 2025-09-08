@@ -1,0 +1,334 @@
+\documentclass{article}
+\usepackage{fullpage, amssymb, amsmath, mathrsfs, graphicx,setspace,bm}
+
+
+
+\begin{document}
+\begin{flushright} Oreofe Solarin \end{flushright}
+\noindent MATH 345 Homework 1 Solutions  \\
+
+\noindent \textbf{Prelimary Def:} Thermal Energy (T.E.), Heat Energy (H.E.), Heat Flux (H.F.), Thermal Energy Density (T.E.D.), Heat Source (H.S.), Specific Heat (S.H.)\\ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1.2.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Problem 1.2.4}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/p124.jpeg}
+    \caption{Rod}
+\end{figure}
+
+\noindent We define our surface area of the rod as \(A(x)\). 
+
+\noindent T.E.D.: 
+\[
+ e(x,t)
+\]
+
+\noindent H.E.:
+\[
+ e(x,t) A(x) \cdot (b-a)
+\]
+\noindent where the volume of a slice is \(A(x) \cdot (b-a)\) and we define \((b-a)=\Delta x\).
+
+\[
+\frac{\partial}{\partial t} \Bigl[e(x,t) \cdot A(x) \Delta x \Bigr] \approx \phi(x,t)A(x) - \phi(x+\Delta x,t)A(x+\Delta x)
+\]
+\noindent (L: time rate of change of energy in slice. R: inflow at \(x\) minus outflow at \(x+\Delta x\) plus sources.)
+
+\medskip
+
+\noindent In the limit as \(\Delta x \to 0\), divide by \(\Delta x\) and we use
+\[
+\phi(x+\Delta x,t)A(x+\Delta x) = \phi(x,t)A(x) + \partial_x[\phi(x,t)A(x)]\,\Delta x + o(\Delta x)
+\]
+which yields
+\[
+\frac{\partial}{\partial t} [e(x,t) A(x)] = - \, \frac{\partial}{\partial x} [\phi(x,t)A(x)]
+\]
+
+\[
+e(x,t)=\rho c\,T(x,t), \qquad \phi(x,t) = -\,k\,\frac{\partial T}{\partial x}(x,t).
+\]
+
+\[
+\frac{\partial}{\partial t}\Bigl[\rho c\,A(x)\,T(x,t)\Bigr]
+= -\,\frac{\partial}{\partial x}\Bigl[-\,k\,A(x)\,T_x(x,t)\Bigr].
+\]
+\noindent Since \(A=A(x)\) is time-independent and \(k,\rho,c\) are constants,
+\[
+\rho c\,A(x)\,T_t(x,t) \;=\; \frac{\partial}{\partial x}\Bigl(k\,A(x)\,T_x(x,t)\Bigr).
+\]
+\noindent Hence the heat eq. for a rod with \(A(x)\) and \(Q=0\):
+\[
+\,(\rho c)\,A(x)\,T_t \;=\; \bigl(k\,A(x)\,T_x\bigr)_x\,
+\quad\Longleftrightarrow\quad
+\,T_t \;=\; \alpha\,\frac{1}{A(x)}\,\frac{\partial}{\partial x}\Bigl(A(x)\,T_x\Bigr),\;\;\alpha=\frac{k}{\rho c}.
+\]
+
+\noindent One way we can confirm we have the right answer is to check if \(A(x)\equiv A_0\), then \((kA_0 T_x)_x = kA_0 T_{xx}\) and we get \(T_t=\alpha\,T_{xx}\).
+\vspace{0.2\linewidth}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1.2.7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Problem 1.2.7}
+
+\noindent Suppose that S.H. is \(c=c(x,u)\)
+
+\noindent (a)
+
+\noindent For a small temperature to raise $u\to u+du$ at fixed $x$ requires per unit mass heat
+
+\[
+dq = c(x,u)\,du.
+\]
+
+\[
+q(x,t)=\int_{0}^{u(x,t)} c\bigl(x,\bar u\bigr)\,d\bar u,
+\]
+
+\medskip
+
+\noindent (b)
+
+\noindent T.E. per unit volume is
+\[
+e(x,t)=\rho(x)\,q(x,t)=\rho(x)\int_{0}^{u(x,t)} c\bigl(x,\bar u\bigr)\,d\bar u.
+\]
+
+\noindent Conservation of thermal energy
+
+\[
+\frac{\partial e}{\partial t} \;=\; -\,\frac{\partial \phi}{\partial x} \;+\; Q,
+\]
+\smallskip
+\noindent\emph{Leibniz rule} Since $\bar u$ has no explicit $t$–dependence,
+\[
+\frac{\partial}{\partial t}\!\left[\int_{0}^{u(x,t)} c\bigl(x,\bar u\bigr)\,d\bar u\right]
+= c\bigl(x,u(x,t)\bigr)\,u_t(x,t)
+\]
+
+\noindent Hence
+\[
+\frac{\partial e}{\partial t}
+= \rho(x)\,c\bigl(x,u\bigr)\,u_t(x,t)
+\]
+
+\[
+\rho(x)\,c\bigl(x,u\bigr)\,u_t
+\;=\; -\,\phi_x \;+\; Q
+\]
+With Fourier’s law
+\[
+\phi(x,t) = -\,K_0(x)\,u_x \quad\Longrightarrow\quad
+-\phi_x = \partial_x\!\bigl(K_0(x)\,u_x\bigr)
+\]
+\[
+\;\rho(x)\,c\bigl(x,u\bigr)\,u_t
+= \frac{\partial}{\partial x}\!\Bigl(K_0(x)\,u_x\Bigr) + Q(x,t)
+\]
+If $K_0,\rho$ are constants and $Q=0$ this is
+\[
+(\rho\,c(x,u))\,u_t = K_0\,u_{xx},
+\qquad\quad
+u_t = \frac{K_0}{\rho}\,\frac{u_{xx}}{c(x,u)}
+\]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1.4.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Problem 1.4.2}
+
+\noindent Equilibrium $\Rightarrow u_t=0$. With constant properties and Fourier’s law
+$\phi=-K_0 u_x$
+\[
+\frac{\partial e}{\partial t}=0=-\phi_x+Q \;\;\Longrightarrow\;\; (K_0 u_x)_x+Q=0
+\quad\Rightarrow\quad K_0\,u_{xx}+Q=0
+\]
+
+
+\noindent (a)
+
+% \begin{enumerate}
+$Q=0$, $\;u_x(0)=0,\;u(L)=T$.
+\[
+u_{xx}=0 \;\Rightarrow\; u(x)=ax+b,\quad u_x=a.
+\]
+From $u_x(0)=0$ we get $a=0$, hence $u(x)\equiv b$. Using $u(L)=T$ gives
+\[
+\,u(x)\equiv T\,
+\]
+
+\noindent (b)
+
+$\displaystyle \frac{Q}{K_0}=1\;\Rightarrow\;Q=K_0$, $\;u(0)=T_1,\;u(L)=T_2$.
+\[
+K_0 u_{xx}+K_0=0 \;\Rightarrow\; u_{xx}=-1.
+\]
+\[
+u_x(x) = \int u_{xx}(x) \,dx = \int (-1) \,dx = -x + C_1
+\]
+\[
+u(x) = \int u_x(x) \,dx = \int (-x + C_1) \,dx = -\frac{x^2}{2} + C_1 x + C_2
+\]
+Apply BCs:
+\[
+u(0)=T_1 \Rightarrow C_2=T_1,\qquad
+u(L)=T_2 \Rightarrow -\frac{L^2}{2}+C_1 L+T_1=T_2 \Rightarrow
+C_1=\frac{T_2-T_1}{L}+\frac{L}{2}
+\]
+Therefore
+\[
+u(x)=-\frac{x^2}{2}+\Bigl(\frac{T_2-T_1}{L}+\frac{L}{2}\Bigr)x+T_1
+\;=\;
+T_1+\frac{T_2-T_1}{L}\,x+\frac{x(L-x)}{2}
+\]
+\[
+\,u(x)=T_1+\frac{T_2-T_1}{L}\,x+\frac{x(L-x)}{2}\,
+\]
+
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1.4.8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Problem 1.4.8}
+\[
+u_{xx}=0 \quad\Longrightarrow\quad u(x)=a x + b,\; u_x(x)\equiv a
+\]
+BCs give
+\[
+u_x(0,t)=1 \Rightarrow a=1,\qquad u_x(L,t)=\beta \Rightarrow a=\beta
+\]
+Consistency $\Rightarrow \beta=1$
+
+\medskip
+
+\noindent If $\beta=1$, the family of steady states is
+\[
+\,u_{\mathrm{eq}}(x)=x+C,\;\;C\in\mathbb{R}\,
+\]
+
+\medskip
+\noindent\emph{Physical explanation.}
+Integrate the PDE over $(0,L)$:
+\[
+\frac{d}{dt}\int_0^L u\,dx=\int_0^L u_{xx}\,dx=u_x(L,t)-u_x(0,t)=\beta-1.
+\]
+Thus:
+\[
+\;\beta\neq 1\;\Rightarrow\;\text{net heat flux }\neq 0\;\Rightarrow\;\int_0^L u\,dx
+\text{ drifts linearly in time }\Rightarrow\text{ no equilibrium.}\;
+\]
+\[
+\;\beta=1\;\Rightarrow\;\text{net flux }=0\;\Rightarrow\text{ equilibrium exists.}\;
+\]
+
+\medskip
+\noindent\emph{Which $C$?} When $\beta=1$, the spatial mean is conserved:
+\[
+\int_0^L u(x,t)\,dx=\int_0^L f(x)\,dx.
+\]
+\[
+\int_0^L (x+C)\,dx=\int_0^L f(x)\,dx
+\;\;\Rightarrow\;\;
+C=\frac{1}{L}\int_0^L f(x)\,dx-\frac{L}{2}.
+\]
+So the steady state compatible with the initial data is
+\[
+\,u_{\mathrm{eq}}(x)=x+\Bigl(\frac{1}{L}\int_0^L f(x)\,dx-\frac{L}{2}\Bigr)\,
+\quad\text{exists iff }\beta=1\text{.}
+\]
+
+\pagebreak
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1.4.11
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Problem 1.4.11}
+
+\medskip
+\noindent Let
+\[
+E(t)\;=\;\int_{0}^{L} u(x,t)\,dx
+\]
+
+\[
+E'(t)\;=\;\int_{0}^{L} u_t\,dx
+=\int_{0}^{L}\big(u_{xx}+4\big)\,dx
+=\Big[u_x\Big]_{0}^{L}+4L
+=u_x(L,t)-u_x(0,t)+4L
+=6-5+4L
+=1+4L.
+\]
+
+\[
+\,E(t)=E(0)+(1+4L)\,t
+\;=\;\int_{0}^{L} f(x)\,dx\;+\;(1+4L)\,t\,.
+\]
+
+\medskip
+With constant density $\rho$, S.H. $c$, and cross-sectional area $A$, total T.E. is
+\[
+\,\mathcal{H}(t)=\rho\,c\,A\,E(t)
+=\rho c A\!\left(\int_{0}^{L} f(x)\,dx+(1+4L)\,t\right).\,
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1.5.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\textbf{Problem 1.5.3.}\quad $x=r\cos\theta,\;y=r\sin\theta$.
+
+\begin{enumerate}
+\item[\textbf{(a)}] Since $r^2=x^2+y^2$,
+\[
+2r\,r_x=2x\Rightarrow r_x=\frac{x}{r}=\cos\theta,\qquad
+2r\,r_y=2y\Rightarrow r_y=\frac{y}{r}=\sin\theta.
+\]
+Also $\theta=\arctan(y/x)$, so
+\[
+\theta_x=\frac{-y}{x^2+y^2}=-\frac{\sin\theta}{r},
+\qquad
+\theta_y=\frac{x}{x^2+y^2}=\frac{\cos\theta}{r}.
+\] 
+
+\item[\textbf{(b)}] Position vector $\vec r = x\,\hat{\vec i}+y\,\hat{\vec j}
+= r(\cos\theta\,\hat{\vec i}+\sin\theta\,\hat{\vec j})$,
+so
+\[
+\;\hat{\vec r}=\cos\theta\,\hat{\vec i}+\sin\theta\,\hat{\vec j}\;,\qquad
+\;\hat{\bm\theta}=-\sin\theta\,\hat{\vec i}+\cos\theta\,\hat{\vec j}\;
+\]
+(Obtain $\hat{\bm\theta}$ by $+90^\circ$ rotation or by $\partial_\theta\hat{\vec r}$.) 
+
+\item[\textbf{(c)}] Chain rule:
+\[
+\partial_x=r_x\,\partial_r+\theta_x\,\partial_\theta
+=\cos\theta\,\partial_r-\frac{\sin\theta}{r}\,\partial_\theta,\quad
+\partial_y=r_y\,\partial_r+\theta_y\,\partial_\theta
+=\sin\theta\,\partial_r+\frac{\cos\theta}{r}\,\partial_\theta.
+\]
+Hence
+\[
+\nabla=\hat{\vec i}\,\partial_x+\hat{\vec j}\,\partial_y
+=(\cos\theta\,\hat{\vec i}+\sin\theta\,\hat{\vec j})\,\partial_r
++(-\sin\theta\,\hat{\vec i}+\cos\theta\,\hat{\vec j})\,\frac{1}{r}\partial_\theta
+=\boxed{\;\hat{\vec r}\,\partial_r+\hat{\bm\theta}\,\frac{1}{r}\partial_\theta\;}.
+\]
+Applying to $u$,
+\[
+\;\nabla u=\hat{\vec r}\,u_r+\hat{\bm\theta}\,\frac{1}{r}\,u_\theta\;
+\]
+\end{enumerate}
+
+\end{document}

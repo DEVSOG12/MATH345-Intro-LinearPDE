@@ -1,0 +1,108 @@
+\documentclass[12]{article}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{subfig} 
+\usepackage{    }
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage{fullpage, amssymb, mathrsfs, graphicx,setspace,bm}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\oldst}{~|~}
+\newcommand{\st}{:}
+\newcommand{\lm}[2]{\ensuremath{\displaystyle\lim_{#1 \rightarrow #2}}}
+\newcommand{\und}[1]{\underline{#1}}
+\newcommand{\ub}[1]{\underline{\textbf{#1}}}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+
+
+\begin{document}
+%\begin{left}
+\noindent {\Large Math 345} \hfill {\Large Fall 2025} \vspace{0.25cm}\\
+{\large {\bf Homework \#1}} \vspace{0.1cm} \\
+{\large {\bf Due: September 8, 2025, 11:59 p.m.}} \vspace{0.5cm} \\
+%\end{left}
+{\it Show work to justify your answers and write neatly (or type) for full credit. Your work must be uploaded onto 
+Gradescope (accessed through Canvas).} 
+%Your code must be submitted electronically to Canvas. 
+%Graphs generated in Matlab must be saved as .eps, .jpeg, or pdf files.}
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Problem 1
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Problem 1.2.4. Derive the heat equation for a rod assuming constant thermal properties with variable cross-sectional area $A(x)$ assuming no sources by considering the total thermal energy between $x=a$ and $x=b$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Problem 2
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Problem 1.2.7. Suppose that the specific heat is a function of position and temperature, $c(x,u)$.
+\begin{enumerate}
+\item Show that the heat energy per unit mass necessary to raise the temperature of a thin slice of thickness $\Delta x$ from $0^{\circ}$ to $u(x,t)$ is not $c(x)u(x,t)$, but instead 
+$\ds{\int_0^u c(x,\bar{u}) \, d \bar{u}}$. 
+\item Rederive the heat equation in this case. Show that
+\[
+\frac{\partial e}{\partial t} = - \frac{\partial \phi}{\partial x} + Q
+\]
+remains unchanged. Hint: Assume $\bar{u}$ is not a function of time. Apply Leibniz’s rule.
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Problem 3
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Problem 1.4.2. Determine the equilibrium temperature distribution for a one-dimensional rod 
+with constant thermal properties with the following sources and boundary conditions:
+\begin{enumerate}
+\item $Q = 0$, $\ds{\frac{\partial u}{\partial x} (0) = 0},$ $u(L) = T$.
+\item $\ds{\frac{Q}{K_0} = 1}$, $u(0) = T_1$, $u(L) = T_2$.
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Problem 4
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Problem 1.4.8. Determine an equilibrium temperature distribution (if one exists). For what values of $\beta$ are there solutions? Explain physically.
+\[
+\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}, \qquad u(x,0) = f(x), \qquad 
+\frac{\partial u}{\partial x}(0,t) = 1, \qquad \frac{\partial u}{\partial x}(L,t) = \beta.
+\]
+
+
+\item Problem 1.4.11. Suppose $\ds{\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2} + 4}$, $u(x,0) = f(x)$,  $\ds{\frac{\partial u}{\partial x}(0,t) = 5}$, and 
+$\ds{\frac{\partial u}{\partial x}(L,t) = 6}$.  Calculate the total thermal energy in the one-dimensional rod (as a function of time).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Problem 5
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Problem 1.5.3. Note that we will start this problem in class. Consider the polar coordinates $x = r \cos \theta$, $y = r \sin \theta$.
+\begin{enumerate}
+\item Since $r^2 = x^2 + y^2$, show that 
+\[
+\frac{\partial r}{\partial x} = \cos \theta, \quad
+\frac{\partial r}{\partial y} = \sin \theta, \quad
+\frac{\partial \theta}{\partial y} = \frac{\cos \theta}{r}, \quad 
+\frac{\partial \theta}{\partial x} = - \frac{\sin \theta}{r}.
+\]
+\item Show that $\hat{\vec{r}} = \cos \theta \, \hat{\vec{i}} +  \sin \theta \, \hat{\vec{j}}$ and 
+$\hat{\bm \theta} = - \sin \theta \, \hat{\vec{i}} +  \cos \theta \, \hat{\vec{j}}$. 
+\item Using the chain rule, show that
+\[
+\nabla  = \hat{\vec{r}} \frac{\partial }{\partial r} + \hat{\bm \theta} \frac{1}{r}  \frac{\partial }{\partial \theta} \text{, and hence }
+\nabla u  = \hat{\vec{r}} \frac{\partial u }{\partial r} + \hat{\bm \theta} \frac{1}{r}  \frac{\partial u }{\partial \theta}.
+\]
+\end{enumerate}
+
+%\begin{center}
+%\includegraphics[width=0.6\textwidth]{Screenshot.png}
+%\end{center}
+\end{enumerate}
+\end{document}
