@@ -1,0 +1,44 @@
+% Problem 3.4.6 — Fourier cosine coefficients of e^x by differentiation
+\paragraph{Problem 3.4.6.} There are mistakes in the demonstration attempting to obtain the Fourier cosine coefficients of $e^x$ on $[0,L]$.
+
+\paragraph{Corrections.}
+Write the half-range cosine series in the same convention as the statement:
+\[
+ e^x = A_0 + \sum_{n=1}^{\infty} A_n \cos\!\left(\frac{n\pi x}{L}\right).
+\]
+Differentiating term-by-term gives
+\[
+ e^x = \frac{d}{dx}e^x = -\sum_{n=1}^{\infty} \frac{n\pi}{L} A_n \, \sin\!\left(\frac{n\pi x}{L}\right),
+\]
+no extra factor of $x$. Differentiating again yields
+\[
+ e^x = \frac{d^2}{dx^2}e^x = -\sum_{n=1}^{\infty} \left(\frac{n\pi}{L}\right)^2 A_n \, \cos\!\left(\frac{n\pi x}{L}\right),
+\]
+again without any spurious factor of $x^2$. It is \emph{not} valid to conclude from these two series that $A_0=0$ and $A_n=0$ by direct termwise comparison: the constant term and the other coefficients of the cosine series of $e^x$ and those of $e^x{''}$ differ by boundary terms.
+
+\paragraph{Computing the coefficients without the usual integrals.}
+Since $e^x$ satisfies $f''=f$ on $(0,L)$, multiply the identity $f=f''$ by $\cos\big(\tfrac{m\pi x}{L}\big)$ and integrate on $[0,L]$. Integration by parts twice gives, for $m\ge1$,
+\[
+ \int_0^L f(x)\cos\!\left(\frac{m\pi x}{L}\right)\,dx
+ = \big[f'(x)\cos\!\left(\tfrac{m\pi x}{L}\right)\big]_0^L
+ - \left(\frac{m\pi}{L}\right)^2\int_0^L f(x)\cos\!\left(\frac{m\pi x}{L}\right)\,dx.
+\]
+Because $\sin(m\pi)=\sin 0=0$, the intermediate boundary terms vanish. Using orthogonality, $\int_0^L f\cos(\tfrac{m\pi x}{L})\,dx = \tfrac{L}{2}A_m$ for $m\ge1$, and $f'(0)=1$, $f'(L)=e^L$, we find
+\[
+ \left(1+\left(\tfrac{m\pi}{L}\right)^{\!2}\right)\frac{L}{2}A_m = e^L(-1)^m - 1,
+\]
+so
+\[
+ \boxed{\displaystyle A_m = \frac{2}{L}\,\frac{(-1)^m e^L - 1}{1+\left(\tfrac{m\pi}{L}\right)^{\!2}}\quad (m\ge1).}
+\]
+For the constant term, integrate $f=f''$ on $[0,L]$:
+\[\int_0^L f(x)\,dx = f'(L)-f'(0) = e^L-1.\]
+But $\int_0^L f = LA_0$ (in this convention), hence
+\[
+ \boxed{\displaystyle A_0 = \frac{e^L-1}{L}.}
+\]
+
+\paragraph{Remark on conventions.} If you prefer the standard cosine series $e^x \sim \tfrac{a_0}{2}+\sum_{n\ge1} a_n\cos(\tfrac{n\pi x}{L})$, then $a_0=2A_0$ and $a_n=A_n$, i.e.
+\[
+ a_0 = \frac{2(e^L-1)}{L},\qquad a_n = \frac{2}{L}\,\frac{(-1)^n e^L - 1}{1+\left(\tfrac{n\pi}{L}\right)^{\!2}}\ (n\ge1).
+\]

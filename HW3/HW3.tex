@@ -1,0 +1,311 @@
+\documentclass{article}
+\usepackage{fullpage, amssymb, amsmath, mathrsfs, graphicx,setspace,bm,verbatim, hyperref}
+
+
+\begin{document}
+\begin{flushleft} Oreofe Solarin\end{flushleft}
+\noindent MATH 345 Homework 3 Solution
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 2.5.27
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem 2.5.27}
+\[
+\psi(r, \theta) = c_1 ln(\frac{r}{a}) + U(r - \frac{a^2}{r})\sin\theta
+\]
+
+\[
+u_r = \frac{1}{r}\frac{\partial\psi}{\partial\theta} = U(1-\frac{a^2}{r^2})\cos\theta, u_\theta = - \frac{\partial\psi}{\partial r} = - \frac{c_1}{r}-U(1+\frac{a^2}{r^2})\sin\theta
+\]
+
+\noindent On the cylinder $r = a: u_r(a,\theta)=0$ and
+\[
+u_\theta(a, \theta) = - \frac{c_1}{a} - 2U\,\sin\theta
+\]
+
+\noindent A stagination point on the cylinder need $u_\theta=0$, so
+\[
+\sin\theta = - \frac{c_1}{2aU}
+\]
+
+\noindent This has a real solution $\iff |c_1| \leq 2aU$
+
+\noindent Since the circulation is \(\tau = \int^{2\pi}_0 u_\theta r\, d\theta = 2\pi c_1\)
+
+\noindent Thus, it needs to satisfy 
+\[
+|\tau| \leq 4\pi aU
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3.2.3 (e)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem  3.2.3 (e)}
+\begin{figure}[!htp]
+    \includegraphics[width=0.75\linewidth]{p323.png}
+    \centering
+\end{figure}
+
+\noindent MATLAB code reference:~\ref{p323}
+% \verbatiminput{p323.m}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3.2.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem  3.2.4}
+
+\[
+f(x) = e^{-x}, [-L, L]
+\]
+\noindent We use
+\[
+f(x)\sim \frac{a_0}{2}+\sum_{n=1}^{\infty}\Big[a_n\cos\frac{n\pi x}{L}+b_n\sin\frac{n\pi x}{L}\Big],
+\]
+\[
+a_0=\frac{1}{L}\int_{-L}^{L}f(x)\,dx,\quad
+a_n=\frac{1}{L}\int_{-L}^{L}f(x)\cos\frac{n\pi x}{L}\,dx,\quad
+b_n=\frac{1}{L}\int_{-L}^{L}f(x)\sin\frac{n\pi x}{L}\,dx.
+\]
+
+\noindent Let $k=\dfrac{n\pi}{L}$. 
+\[
+\int e^{-x}\cos(kx)\,dx=\frac{e^{-x}\big(-\cos kx+k\sin kx\big)}{1+k^2},\qquad
+\int e^{-x}\sin(kx)\,dx=\frac{e^{-x}\big(-\sin kx-k\cos kx\big)}{1+k^2}.
+\]
+
+\noindent Our constant term value
+\[
+a_0=\frac{1}{L}\int_{-L}^{L}e^{-x}\,dx=\frac{1}{L}\left[-e^{-x}\right]_{-L}^{L}
+=\frac{e^{L}-e^{-L}}{L}=\frac{2\sinh L}{L}.
+\]
+
+\noindent Cosine coefficients
+
+\[
+\begin{aligned}
+a_n&=\frac{1}{L}\left[\frac{e^{-x}(-\cos kx+k\sin kx)}{1+k^2}\right]_{-L}^{L} \\
+&=\frac{1}{L(1+k^2)}\Big[(-\cos kL+k\sin kL)e^{-L}
+-(-\cos(-kL)+k\sin(-kL))e^{L}\Big]\\
+&=\frac{1}{L(1+k^2)}\Big[(-\cos n\pi)e^{-L}-(-\cos n\pi)e^{L}\Big]\\
+&=\frac{2\sinh L}{L}\cdot\frac{(-1)^n}{1+k^2}.
+\end{aligned}
+\]
+
+\noindent Since $1+k^2=1+(n\pi/L)^2=(L^2+n^2\pi^2)/L^2$
+\[
+a_n=\frac{2L\,\sinh L\,(-1)^n}{L^2+n^2\pi^2}.
+\]
+
+\noindent Sine coefficients
+
+\[
+\begin{aligned}
+b_n&=\frac{1}{L}\left[\frac{e^{-x}(-\sin kx-k\cos kx)}{1+k^2}\right]_{-L}^{L}\\
+&=\frac{1}{L(1+k^2)}\Big[(-\sin n\pi-k\cos n\pi)e^{-L}
+-(\sin n\pi-k\cos n\pi)e^{L}\Big]\\
+&=\frac{1}{L(1+k^2)}\Big[-k(-1)^n e^{-L}+k(-1)^n e^{L}\Big]\\
+&=\frac{2\sinh L}{L}\cdot\frac{k(-1)^n}{1+k^2}.
+\end{aligned}
+\]
+
+\noindent Thus
+\[
+b_n=\frac{2 n\pi\,\sinh L\,(-1)^n}{L^2+n^2\pi^2}.
+\]
+
+\noindent Final series
+
+\[
+e^{-x}\sim \frac{\sinh L}{L}
++\sum_{n=1}^{\infty}\left[
+\frac{2L\,\sinh L\,(-1)^n}{L^2+n^2\pi^2}\cos\frac{n\pi x}{L}
++\frac{2 n\pi\,\sinh L\,(-1)^n}{L^2+n^2\pi^2}\sin\frac{n\pi x}{L}
+\right]
+\quad (-L<x<L).
+\]
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3.3.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem  3.3.1}
+
+\begin{figure}[!htp]
+\centering
+\begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{p331a.png}\\
+    (a)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{p331b.png}\\
+    (b)
+\end{minipage}
+\end{figure}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        x & y & SineSeriesValue & CosineSeriesValue \\
+        \hline
+        5 & -5 & -16 & 16 \\
+        9 & -1 & -4 & 4 \\
+        22 & 2 & 7 & 7 \\
+        101 & 1 & 4 & 4 \\
+        \hline
+    \end{tabular}
+    \caption{Values of x, y, and series evaluations}
+    \label{tab:series_values}
+\end{table}
+
+\noindent MATLAB code reference:~\ref{p331}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3.3.8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem  3.3.8}
+\noindent We can split a function $f(x)$ into even and odd parts:
+\[
+f(x) = \underbrace{\frac{f(x) + f(-x)}{2}}_{\text{even}} + \underbrace{\frac{f(x)-f(-x)}{2}}_{\text{odd}}
+\]
+
+
+\noindent For $f(x) = e^x$:
+\[
+e^x = \frac{e^x+ e^{-x}}{2} + \frac{e^x-e^{-x}}{2} = \cosh x + \sinh x
+\]
+
+\noindent where $\cosh x$ is even and $\sinh x$ is odd
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3.4.6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem  3.4.6}
+
+
+We can write the half-range cosine series 
+\[
+ e^x = A_0 + \sum_{n=1}^{\infty} A_n \cos\!\left(\frac{n\pi x}{L}\right).
+\]
+Differentiating term-by-term gives
+\[
+ e^x = \frac{d}{dx}e^x = -\sum_{n=1}^{\infty} \frac{n\pi}{L} A_n \, \sin\!\left(\frac{n\pi x}{L}\right),
+\]
+Differentiating again yields (note no extra factor of $x$)
+\[
+ e^x = \frac{d^2}{dx^2}e^x = -\sum_{n=1}^{\infty} \left(\frac{n\pi}{L}\right)^2 A_n \, \cos\!\left(\frac{n\pi x}{L}\right),
+\]
+
+\noindent It is \emph{not} valid to conclude from these two series that $A_0=0$ and $A_n=0$ by direct termwise comparison: the constant term and the other coefficients of the cosine series of $e^x$ and those of $e^x{''}$ can differ by boundary terms \\
+
+\noindent Since $e^x$ satisfies $f''=f$ on $(0,L)$, we can multiply the identity $f=f''$ by $\cos\big(\tfrac{m\pi x}{L}\big)$ and integrate on $[0,L]$. Doing integration by parts twice gives, for $m\ge1$,
+\[
+ \int_0^L f(x)\cos\!\left(\frac{m\pi x}{L}\right)\,dx
+ = \big[f'(x)\cos\!\left(\tfrac{m\pi x}{L}\right)\big]_0^L
+ - \left(\frac{m\pi}{L}\right)^2\int_0^L f(x)\cos\!\left(\frac{m\pi x}{L}\right)\,dx.
+\]
+\noindent Because $\sin(m\pi)=\sin 0=0$, the intermediate boundary terms vanish and then \medskip
+using orthogonality, $\int_0^L f\cos(\tfrac{m\pi x}{L})\,dx = \tfrac{L}{2}A_m$ for $m\ge1$, and $f'(0)=1$, $f'(L)=e^L$, we find
+\[
+ \left(1+\left(\tfrac{m\pi}{L}\right)^{\!2}\right)\frac{L}{2}A_m = e^L(-1)^m - 1,
+\]
+so
+\[
+  A_m = \frac{2}{L}\,\frac{(-1)^m e^L - 1}{1+\left(\tfrac{m\pi}{L}\right)^{\!2}}\quad (m\ge1)
+\]
+For the constant term, integrate $f=f''$ on $[0,L]$:
+\[\int_0^L f(x)\,dx = f'(L)-f'(0) = e^L-1.\]
+But $\int_0^L f = LA_0$, hence
+\[
+  A_0 = \frac{e^L-1}{L}.
+\]
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3.5.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \textbf{Problem  3.5.2}
+
+\noindent (a) Using the given Fourier sine series of $x$ on $(0<x<L)$,
+\[
+x \sim \sum_{n=1}^{\infty}\frac{2L}{n\pi}(-1)^{n+1}\sin\left(\frac{n\pi x}{L}\right),
+\]
+we want to find the Fourier cosine series of $x^2$ on $(0<x<L)$.
+
+\[
+x^2 \sim \frac{a_0}{2}+\sum_{n=1}^{\infty}a_n\cos\left(\frac{n\pi x}{L}\right),\qquad
+a_n=\frac{2}{L}\int_{0}^{L}x^2\cos\left(\frac{n\pi x}{L}\right)\,dx .
+\]
+Let $k=\dfrac{n\pi}{L}$. Integrate by parts twice:
+\[
+\begin{aligned}
+a_n
+&= \frac{2}{L}\left[ \frac{x^2\sin(kx)}{k} \right]_{0}^{L}
+-\frac{4}{Lk}\int_{0}^{L}x\sin(kx)\,dx \\
+&= -\frac{4}{Lk}\left( \left[ -\frac{x\cos(kx)}{k} \right]_{0}^{L}
++\frac{1}{k}\left[ \frac{\sin(kx)}{k} \right]_{0}^{L} \right) \\
+&= -\frac{4}{Lk}\left( -\frac{L\cos(n\pi)}{k} \right)
+= \frac{4(-1)^n}{k^2}
+= \frac{4L^2}{\pi^2}\frac{(-1)^n}{n^2}.
+\end{aligned}
+\]
+Also
+\[
+\frac{a_0}{2}=\frac{1}{L}\int_{0}^{L}x^2\,dx=\frac{L^2}{3}.
+\]
+Therefore
+\[
+x^2 \sim \frac{L^2}{3}+\frac{4L^2}{\pi^2}\sum_{n=1}^{\infty}\frac{(-1)^n}{n^2}
+\cos\left(\frac{n\pi x}{L}\right),\qquad 0<x<L .
+\]
+
+\medskip
+\noindent (b) From part (a), determine the Fourier sine series of $x^3$ on $(0<x<L)$.
+
+\noindent Write
+\[
+x^3 \sim \sum_{n=1}^{\infty} b_n \sin\left(\frac{n\pi x}{L}\right),\qquad
+b_n=\frac{2}{L}\int_{0}^{L}x^3\sin\left(\frac{n\pi x}{L}\right)\,dx .
+\]
+With $k=\dfrac{n\pi}{L}$ and one integration by parts,
+\[
+\begin{aligned}
+b_n
+&= \frac{2}{L}\left[-\frac{x^3\cos(kx)}{k}\right]_{0}^{L}
++\frac{6}{Lk}\int_{0}^{L}x^2\cos(kx)\,dx \\
+&= -\frac{2L^3(-1)^n}{n\pi}
++\frac{6}{Lk}\cdot \frac{L}{2}a_n
+= -\frac{2L^3(-1)^n}{n\pi}
++\frac{3}{k}a_n .
+\end{aligned}
+\]
+Using $a_n=\dfrac{4L^2(-1)^n}{n^2\pi^2}$ and $1/k=L/(n\pi)$,
+\[
+b_n= -\frac{2L^3(-1)^n}{n\pi}
++\frac{12L^3(-1)^n}{n^3\pi^3}
+= 2L^3(-1)^{n+1}\left(\frac{1}{n\pi}-\frac{6}{n^3\pi^3}\right).
+\]
+Hence
+\[
+x^3 \sim \sum_{n=1}^{\infty}
+2L^3(-1)^{n+1}\left(\frac{1}{n\pi}-\frac{6}{n^3\pi^3}\right)
+\sin\left(\frac{n\pi x}{L}\right),\qquad 0<x<L .
+\]
+
+\pagebreak
+\section*{Appendix}
+\subsection*{MATLAB source listings}
+\begingroup
+\small
+\subsubsection{p323.m}\label{p323}
+\IfFileExists{p323.m}{\verbatiminput{p323.m}}{\textit{File p323.m not found.}}
+\subsubsection{p331.m}\label{p331}
+\IfFileExists{p331.m}{\verbatiminput{p331.m}}{\textit{File p331.m not found.}}
+\endgroup
+
+\end{document}

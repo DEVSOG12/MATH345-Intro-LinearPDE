@@ -1,0 +1,746 @@
+\documentclass[8pt,landscape,twoside]{extarticle}
+\usepackage[margin=0.15in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{multicol}
+\usepackage{physics}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Compact layout settings
+\setlength{\columnsep}{0.15in}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% Remove list spacing
+\setlist{nosep,leftmargin=*}
+
+% Reduce section heading spacing
+\titlespacing*{\section}{0pt}{1pt}{0.5pt}
+\titlespacing*{\subsection}{0pt}{1pt}{0.5pt}
+\titleformat{\section}{\bfseries\small}{}{0em}{}
+\titleformat{\subsection}{\bfseries\footnotesize}{}{0em}{}
+
+% Reduce spacing around equations
+\AtBeginDocument{
+  \setlength{\abovedisplayskip}{1.5pt}
+  \setlength{\belowdisplayskip}{1.5pt}
+  \setlength{\abovedisplayshortskip}{0pt}
+  \setlength{\belowdisplayshortskip}{0pt}
+}
+
+
+\begin{document}
+\begin{multicols}{2}
+\section*{Mr. Sturm Lious Section}
+
+% \subsection*{1.1 General form}
+
+\textbf{General form}. A (regular) Sturm--Liouville eigenvalue problem on $(a,b)$ has the form
+\begin{equation}
+  \label{SL-general}
+  \frac{d}{dx}\!\Big(p(x)\,\phi'(x)\Big) + \big(\lambda r(x) + q(x)\big)\,\phi(x) = 0,
+\end{equation}
+with boundary conditions of the form
+\begin{align*}
+  \alpha_1 \phi(a) + \alpha_2 \phi'(a) &= 0,\\
+  \beta_1  \phi(b) + \beta_2  \phi'(b) &= 0,
+\end{align*}
+(where $(\alpha_1,\alpha_2)$ and $(\beta_1,\beta_2)$ are not both zero).
+
+Typical choices:
+\begin{itemize}
+  \item Dirichlet: $\phi(a)=0$, $\phi(b)=0$.
+  \item Neumann: $\phi'(a)=0$, $\phi'(b)=0$.
+  \item Robin: $\phi(a)-h_1\phi'(a)=0$, $\phi(b)-h_2\phi'(b)=0$, etc.
+\end{itemize}
+
+Assume
+\[
+p(x) > 0,\qquad r(x) > 0 \quad\text{on }(a,b).
+\]
+
+\subsection*{1.2 Weight, inner product, orthogonality}
+
+The \emph{weight function} is
+\[
+w(x) = r(x).
+\]
+
+Define the inner product
+\[
+\langle f,g\rangle = \int_a^b w(x)\,f(x)\,g(x)\,dx
+= \int_a^b r(x)f(x)g(x)\,dx.
+\]
+
+If $\phi_m,\phi_n$ are eigenfunctions corresponding to distinct eigenvalues
+$\lambda_m\neq\lambda_n$ of \eqref{SL-general}, then
+\[
+\boxed{\int_a^b r(x)\,\phi_m(x)\,\phi_n(x)\,dx = 0.}
+\]
+That is, eigenfunctions for different eigenvalues are orthogonal with respect
+to the weight $r$.
+
+\subsection*{1.3 Rayleigh quotient (for sign of eigenvalues)}
+
+Rewriting \eqref{SL-general} as
+\[
+-(p\phi')' - q\phi = \lambda r\phi,
+\]
+multiplying by $\phi$ and integrating, then integrating by parts,
+gives for any nontrivial eigenfunction $\phi$:
+\[
+\lambda
+=
+\frac{\displaystyle\int_a^b\bigl[\,p(x)\,(\phi'(x))^2 - q(x)\,\phi(x)^2\,\bigr]\,dx}
+     {\displaystyle\int_a^b r(x)\,\phi(x)^2\,dx}.
+\]
+
+Typical sign arguments:
+\begin{itemize}
+  \item If $p>0$, $r>0$, $q\le0$, then $\lambda\ge0$.
+  \item If $q<0$ somewhere (and not identically zero), often $\lambda>0$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PDE TEMPLATES: HEAT & WAVE WITH VARIABLE COEFFICIENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{2. Separation of variables: general templates}
+
+\subsection*{2.1 Heat-type equations with variable coefficients}
+
+General 1D heat equation:
+\begin{equation}
+  \label{heat-var}
+  r(x)\,u_t = \frac{\partial}{\partial x}\Big(p(x)\,u_x\Big) + q(x)\,u,
+  \qquad a<x<b,\ t>0.
+\end{equation}
+Here
+\[
+r(x)>0,\quad p(x)>0.
+\]
+
+Assume homogeneous boundary conditions that make the operator
+self-adjoint (e.g.\ Dirichlet/Neumann/Robin of SL type).
+
+\textbf{Separation of variables.} Try $u(x,t)=\phi(x)T(t)$:
+\[
+r\phi T' = (p\phi')'T + q\phi T.
+\]
+Divide by $r\phi T$:
+\[
+\frac{T'}{T}
+=
+\frac{(p\phi')'+q\phi}{r\phi}
+= -\lambda.
+\]
+Hence
+\[
+T'(t) + \lambda T(t) = 0
+\quad\Rightarrow\quad
+T(t) = e^{-\lambda t},
+\]
+and the spatial SL problem is
+\begin{equation}
+  \label{heat-eig}
+  (p\phi')' + q\phi + \lambda r\phi = 0
+  \qquad\Longleftrightarrow\qquad
+  -(p\phi')' - q\phi = \lambda r\phi.
+\end{equation}
+
+Let $\{\lambda_n,\phi_n(x)\}_{n\ge1}$ be the eigenpairs of \eqref{heat-eig}
+satisfying the BCs, with eigenfunctions orthogonal in the weight $r(x)$.
+
+\textbf{General solution.}
+Expand the initial data $u(x,0)=f(x)$ in the eigenfunctions:
+\[
+f(x) = \sum_{n=1}^\infty a_n\phi_n(x),
+\]
+with coefficients
+\begin{equation}
+  \label{coeff-general-heat}
+  a_n
+  =
+  \frac{\displaystyle\int_a^b r(x)\,f(x)\,\phi_n(x)\,dx}
+       {\displaystyle\int_a^b r(x)\,\phi_n(x)^2\,dx}.
+\end{equation}
+Then the solution is
+\begin{equation}
+  \label{heat-solution}
+  u(x,t)
+  = \sum_{n=1}^\infty a_n e^{-\lambda_n t}\,\phi_n(x).
+\end{equation}
+
+\textbf{Long-time behavior.}
+If all $\lambda_n>0$, then $u(x,t)\to0$ as $t\to\infty$.
+If there is a zero eigenvalue $\lambda_0=0$ with eigenfunction $\phi_0$,
+then
+\[
+u(x,t) = a_0\phi_0(x) + \sum_{n\ge1} a_n e^{-\lambda_n t}\phi_n(x)
+\]
+and
+\[
+\lim_{t\to\infty}u(x,t) = a_0\phi_0(x).
+\]
+
+Example: For Neumann (insulated) heat problems one typically has
+$\phi_0(x)=1$ and
+\[
+a_0 = \frac{\displaystyle\int_a^b r(x)f(x)\,dx}
+            {\displaystyle\int_a^b r(x)\,dx},
+\]
+so the solution tends to the weighted spatial average of the initial data.
+
+\subsection*{2.2 Wave-type equations with variable coefficients}
+
+General 1D wave equation:
+\begin{equation}
+  \label{wave-var}
+  r(x)\,u_{tt} = \frac{\partial}{\partial x}\Big(p(x)\,u_x\Big) + q(x)\,u,
+  \qquad a<x<b,\ t>0.
+\end{equation}
+
+Try $u(x,t)=\phi(x)G(t)$:
+\[
+r\phi G'' = (p\phi')'G + q\phi G.
+\]
+Divide by $r\phi G$:
+\[
+\frac{G''}{G}
+=
+\frac{(p\phi')'+q\phi}{r\phi}
+= -\lambda.
+\]
+
+Time ODE:
+\[
+G'' + \lambda G = 0
+\quad\Rightarrow\quad
+G(t) = A\cos(\sqrt{\lambda}\,t) + B\sin(\sqrt{\lambda}\,t).
+\]
+
+Spatial eigenvalue problem (same SL operator as heat-type case):
+\begin{equation}
+  \label{wave-eig}
+  (p\phi')' + q\phi + \lambda r\phi = 0.
+\end{equation}
+
+Let $\{\lambda_n,\phi_n\}_{n\ge1}$ be eigenpairs. The general solution is
+\begin{equation}
+  \label{wave-expansion}
+  u(x,t)=\sum_{n=1}^\infty
+  \bigl(A_n\cos(\sqrt{\lambda_n}\,t)+B_n\sin(\sqrt{\lambda_n}\,t)\bigr)\,\phi_n(x).
+\end{equation}
+
+Given initial conditions
+\[
+u(x,0)=f(x),\qquad u_t(x,0)=g(x),
+\]
+we obtain
+\[
+f(x) = \sum_{n=1}^\infty A_n \phi_n(x),\qquad
+g(x) = \sum_{n=1}^\infty B_n\sqrt{\lambda_n}\,\phi_n(x).
+\]
+
+Using orthogonality in weight $r(x)$:
+\begin{align}
+  \label{An-general-wave}
+  A_n &=
+  \frac{\displaystyle\int_a^b r(x)\,f(x)\,\phi_n(x)\,dx}
+       {\displaystyle\int_a^b r(x)\,\phi_n(x)^2\,dx},\\
+  \label{Bn-general-wave}
+  B_n &=
+  \frac{\displaystyle\int_a^b r(x)\,g(x)\,\phi_n(x)\,dx}
+       {\displaystyle\sqrt{\lambda_n}\int_a^b r(x)\,\phi_n(x)^2\,dx}.
+\end{align}
+
+Special case (as in 5.5.16):
+\begin{itemize}
+  \item For $u_{tt}=c^2(x)u_{xx}$ with $u(0,t)=u(L,t)=0$ we have
+  \[
+  p(x)=1,\quad q(x)=0,\quad r(x)=\frac{1}{c^2(x)}.
+  \]
+  Orthogonality is with weight $1/c^2(x)$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % COMMON SPECIAL CASES
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section*{3. Common special cases}
+
+% \subsection*{3.1 Constant-coefficient heat equation (Dirichlet)}
+
+% \[
+% u_t = k u_{xx} - \beta u, \quad 0<x<L,\ t>0,
+% \]
+% \[
+% u(0,t)=u(L,t)=0,\quad u(x,0)=f(x).
+% \]
+
+% Eigenproblem:
+% \[
+% \phi'' + \mu^2\phi = 0,\quad \phi(0)=\phi(L)=0
+% \quad\Rightarrow\quad
+% \mu_n=\frac{n\pi}{L},\ \phi_n(x)=\sin\frac{n\pi x}{L}.
+% \]
+
+% Separation gives decay rates $k\mu_n^2+\beta$,
+% so the solution is
+% \[
+% u(x,t)
+% =
+% \sum_{n=1}^\infty a_n
+% \exp\!\Big[-\big(k(n\pi/L)^2+\beta\big)t\Big]\,
+% \sin\frac{n\pi x}{L},
+% \]
+% with
+% \[
+% a_n
+% =
+% \frac{2}{L}\int_0^L f(x)\,\sin\frac{n\pi x}{L}\,dx.
+% \]
+
+% \subsection*{3.2 Constant-coefficient heat equation (Neumann)}
+
+% \[
+% u_t = k u_{xx},\quad 0<x<L,
+% \]
+% \[
+% u_x(0,t)=u_x(L,t)=0,\quad u(x,0)=f(x).
+% \]
+
+% Eigenproblem:
+% \[
+% \phi'' + \mu^2\phi = 0,\quad \phi'(0)=\phi'(L)=0
+% \]
+% gives
+% \[
+% \phi_0(x)=1,\ \lambda_0=0;\qquad
+% \phi_n(x)=\cos\frac{n\pi x}{L},\ \lambda_n=k(n\pi/L)^2,\ n\ge1.
+% \]
+
+% Solution:
+% \[
+% u(x,t)
+% = a_0 + \sum_{n=1}^\infty a_n
+% e^{-k(n\pi/L)^2 t}\cos\frac{n\pi x}{L}.
+% \]
+
+% Coefficients (weight $r(x)=1$):
+% \[
+% a_0 = \frac{1}{L}\int_0^L f(x)\,dx,\qquad
+% a_n = \frac{2}{L}\int_0^L f(x)\,\cos\frac{n\pi x}{L}\,dx.
+% \]
+
+% Long-time limit:
+% \[
+% \lim_{t\to\infty}u(x,t)=a_0 \quad\text{(spatial average of $f$)}.
+% \]
+
+% \subsection*{3.3 Constant-coefficient wave equation (Dirichlet)}
+
+% \[
+% u_{tt}=c^2 u_{xx},\quad 0<x<L,
+% \]
+% \[
+% u(0,t)=u(L,t)=0,\quad u(x,0)=f(x),\quad u_t(x,0)=g(x).
+% \]
+
+% Eigenfunctions: $\phi_n(x)=\sin\frac{n\pi x}{L}$, eigenvalues
+% $\lambda_n=(n\pi/L)^2$.
+
+% Solution:
+% \[
+% u(x,t)
+% =
+% \sum_{n=1}^\infty
+% \Big(A_n\cos(c\sqrt{\lambda_n}t)+B_n\sin(c\sqrt{\lambda_n}t)\Big)
+% \sin\frac{n\pi x}{L},
+% \]
+% with
+% \begin{align*}
+% A_n &= \frac{2}{L}\int_0^L f(x)\,\sin\frac{n\pi x}{L}\,dx,\\
+% B_n &= \frac{2}{c n\pi}\int_0^L g(x)\,\sin\frac{n\pi x}{L}\,dx.
+% \end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EULER–CAUCHY (EQUIDIMENSIONAL) ODES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{4. Equidimensional (Euler--Cauchy) ODEs}
+
+A typical equidimensional ODE:
+\begin{equation}
+  \label{EC-general}
+  x^2\phi'' + a x\phi' + b(x)\phi = 0,
+  \qquad x>0,
+\end{equation}
+where $b(x)$ may be constant or contain eigenvalue parameters.
+
+\subsection*{4.1 Power-law ansatz}
+
+Try $\phi(x)=x^m$:
+\[
+\phi' = m x^{m-1},\quad
+\phi'' = m(m-1)x^{m-2}.
+\]
+
+Substitute into \eqref{EC-general} (for constant $b$) to get the algebraic
+(indicial) equation:
+\[
+m(m-1) + a m + b = 0.
+\]
+
+Solve for $m$:
+\begin{itemize}
+  \item Two distinct real roots $m_1\neq m_2$:
+  \[
+  \phi(x)=C_1x^{m_1}+C_2x^{m_2}.
+  \]
+  \item Repeated root $m_1=m_2=m$:
+  \[
+  \phi(x) = C_1 x^m + C_2 x^m\ln x.
+  \]
+  \item Complex roots $m=\alpha\pm i\beta$:
+  \[
+  \phi(x) = x^{\alpha}\Big(C_1\cos(\beta\ln x)+C_2\sin(\beta\ln x)\Big).
+  \]
+\end{itemize}
+
+Example pattern from the practice problems:
+\[
+x^2\phi'' + 2x\phi' + (\lambda -1)\phi = 0
+\quad\Rightarrow\quad
+m^2+m+(\lambda-1)=0.
+\]
+If $\lambda>5/4$ the roots are complex and the general real solution is
+\[
+\phi(x) = x^{-1/2}\Big(A\cos(\mu\ln x) + B\sin(\mu\ln x)\Big),
+\]
+with $\mu = \tfrac12\sqrt{4\lambda-5}$, etc.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ORTHOGONALITY PROOF PATTERN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{5. Orthogonality proof pattern}
+
+Given an SL problem
+\[
+(p\phi')' + (\lambda r+q)\phi=0
+\]
+with appropriate self-adjoint BCs, the orthogonality for $\lambda_m\neq\lambda_n$
+is obtained by:
+
+\begin{enumerate}
+  \item Write the equations for $\phi_m$ and $\phi_n$:
+  \[
+  (p\phi_m')' + (\lambda_m r+q)\phi_m = 0,\qquad
+  (p\phi_n')' + (\lambda_n r+q)\phi_n = 0.
+  \]
+  \item Multiply the first by $\phi_n$, the second by $\phi_m$, and subtract:
+  \[
+  \phi_n(p\phi_m')' - \phi_m(p\phi_n')'
+  + (\lambda_m-\lambda_n)r\phi_m\phi_n = 0.
+  \]
+  \item Recognize a derivative:
+  \[
+  \phi_n(p\phi_m')' - \phi_m(p\phi_n')'
+  = \frac{d}{dx}\big(p(\phi_n\phi_m' - \phi_m\phi_n')\big).
+  \]
+  \item Integrate over $(a,b)$:
+  \[
+  \big[p(\phi_n\phi_m' - \phi_m\phi_n')\big]_a^b
+  + (\lambda_m-\lambda_n)\int_a^b r\phi_m\phi_n\,dx = 0.
+  \]
+  \item Use the boundary conditions to show the boundary term is $0$; conclude
+  \[
+  (\lambda_m-\lambda_n)\int_a^b r(x)\phi_m(x)\phi_n(x)\,dx = 0,
+  \]
+  hence orthogonality for $\lambda_m\neq\lambda_n$.
+\end{enumerate}
+
+\noindent \textbf{Diri}
+\[
+u(x,t) = \sum_{n=1}^\infty
+\Big[ A_n \cos(\omega_n t) + B_n \sin(\omega_n t) \Big]
+\sin\!\frac{n\pi x}{L},\qquad \omega_n = \frac{c n\pi}{L}.
+\]
+
+% Coefficients from initial data:
+\[
+A_n = \frac{2}{L}\int_0^L f(x)\,\sin\frac{n\pi x}{L}\,dx,
+\]
+\[
+B_n = \frac{2}{c n\pi}\int_0^L g(x)\,\sin\frac{n\pi x}{L}\,dx.
+\]
+
+\noindent \textbf{Neu}
+\[
+u(x,t) = A_0 + B_0 t
++ \sum_{n=1}^\infty
+\Big[ A_n \cos(\omega_n t) + B_n \sin(\omega_n t) \Big]
+\cos\!\frac{n\pi x}{L},\qquad \omega_n = \frac{c n\pi}{L}.
+\]
+
+% Coefficients from initial data:
+
+% zero mode:
+\[
+A_0 = \frac{1}{L}\int_0^L f(x)\,dx, \qquad
+B_0 = \frac{1}{L}\int_0^L g(x)\,dx.
+\]
+
+% higher modes (n>=1):
+\[
+A_n = \frac{2}{L}\int_0^L f(x)\,\cos\frac{n\pi x}{L}\,dx,
+\]
+\[
+B_n = \frac{2}{c n\pi}\int_0^L g(x)\,\cos\frac{n\pi x}{L}\,dx,
+\qquad n\ge1.
+\]
+
+\noindent \textbf{Mixed BC: fixed at x=0, free at x=L}
+\[
+\phi_n(x) = \sin\!\left(\frac{(2n+1)\pi x}{2L}\right), \qquad
+\lambda_n = \left(\frac{(2n+1)\pi}{2L}\right)^2,
+\qquad \omega_n = c \sqrt{\lambda_n}
+                = \frac{(2n+1)\pi c}{2L}.
+\]
+
+% General solution:
+\[
+u(x,t) = \sum_{n=0}^\infty
+\Big[ A_n \cos(\omega_n t) + B_n \sin(\omega_n t) \Big]
+\sin\!\left(\frac{(2n+1)\pi x}{2L}\right).
+\]
+
+% Coefficients (using orthogonality: ∫_0^L phi_n^2 dx = L/2):
+\[
+A_n = \frac{2}{L}\int_0^L f(x)
+      \sin\!\left(\frac{(2n+1)\pi x}{2L}\right)\,dx,
+\]
+\[
+B_n = \frac{2}{L\omega_n}\int_0^L g(x)
+      \sin\!\left(\frac{(2n+1)\pi x}{2L}\right)\,dx
+    = \frac{4}{c(2n+1)\pi}
+      \int_0^L g(x)\sin\!\left(\frac{(2n+1)\pi x}{2L}\right)\,dx.
+\]
+
+\noindent \textbf{Mixed BC: free at x=0, fixed at x=L}
+\[
+\phi_n(x) = \cos\!\left(\frac{(2n+1)\pi x}{2L}\right), \qquad
+\lambda_n = \left(\frac{(2n+1)\pi}{2L}\right)^2,
+\qquad \omega_n = \frac{(2n+1)\pi c}{2L}.
+\]
+
+% General solution:
+\[
+u(x,t) = \sum_{n=0}^\infty
+\Big[ A_n \cos(\omega_n t) + B_n \sin(\omega_n t) \Big]
+\cos\!\left(\frac{(2n+1)\pi x}{2L}\right).
+\]
+
+% Coefficients (again, ∫_0^L phi_n^2 dx = L/2):
+\[
+A_n = \frac{2}{L}\int_0^L f(x)
+      \cos\!\left(\frac{(2n+1)\pi x}{2L}\right)\,dx,
+\]
+\[
+B_n = \frac{2}{L\omega_n}\int_0^L g(x)
+      \cos\!\left(\frac{(2n+1)\pi x}{2L}\right)\,dx
+    = \frac{4}{c(2n+1)\pi}
+      \int_0^L g(x)\cos\!\left(\frac{(2n+1)\pi x}{2L}\right)\,dx.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fourier Series: Even/Odd Extensions, Jumps, and S–L Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{1. Full Fourier Series on \([-L,L]\)}
+
+A \(2L\)-periodic function \(F(x)\) has Fourier series
+\[
+F(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty
+\left( a_n \cos\frac{n\pi x}{L} + b_n \sin\frac{n\pi x}{L} \right),
+\]
+with
+\[
+a_0 = \frac{1}{L} \int_{-L}^{L} F(x)\,dx,\quad
+a_n = \frac{1}{L} \int_{-L}^{L} F(x)\cos\frac{n\pi x}{L}\,dx,\quad
+b_n = \frac{1}{L} \int_{-L}^{L} F(x)\sin\frac{n\pi x}{L}\,dx.
+\]
+
+If \(F\) is piecewise \(C^1\) (piecewise smooth, finitely many jumps) and
+\(2L\)-periodic, then:
+
+\[
+\lim_{N\to\infty} S_N(x) =
+\begin{cases}
+F(x), & F\ \text{continuous at }x,\\[2mm]
+\displaystyle
+\frac{1}{2}\big(F(x^-)+F(x^+)\big),
+& x \text{ a jump point},
+\end{cases}
+\]
+where \(S_N(x)\) is the \(N\)-th partial sum of the Fourier series.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section*{2. Half-Range Expansions on \([0,L]\)}
+
+% We start with a function defined only on \(0\le x\le L\), say \(f(x)\).
+
+% \subsection*{2.1 Even Extension (Cosine Series)}
+
+% Define the \emph{even extension}
+% \[
+% f_e(x) =
+% \begin{cases}
+% f(x),   & 0\le x\le L,\\[1mm]
+% f(-x),  & -L\le x<0,
+% \end{cases}
+% \]
+% and then extend to all \(x\in\mathbb{R}\) by periodicity
+% \(f_e(x+2L)=f_e(x)\).
+
+% Then \(f_e(-x)=f_e(x)\) and its Fourier series has only cosines.
+% The \textbf{Fourier cosine series} of \(f\) on \([0,L]\) is
+% \[
+% f(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos\frac{n\pi x}{L},
+% \quad 0\le x\le L,
+% \]
+% with
+% \[
+% a_0 = \frac{2}{L} \int_0^{L} f(x)\,dx,\qquad
+% a_n = \frac{2}{L} \int_0^{L} f(x)\cos\frac{n\pi x}{L}\,dx.
+% \]
+
+% \subsection*{2.2 Odd Extension (Sine Series)}
+
+% Define the \emph{odd extension}
+% \[
+% f_o(x) =
+% \begin{cases}
+% f(x),   & 0\le x\le L,\\[1mm]
+% -\,f(-x), & -L\le x<0,
+% \end{cases}
+% \]
+% and again extend by periodicity \(f_o(x+2L)=f_o(x)\).
+
+% Then \(f_o(-x)=-f_o(x)\) and its Fourier series has only sines.
+% The \textbf{Fourier sine series} of \(f\) on \([0,L]\) is
+% \[
+% f(x) \sim \sum_{n=1}^\infty b_n \sin\frac{n\pi x}{L},
+% \quad 0\le x\le L,
+% \]
+% with
+% \[
+% b_n = \frac{2}{L} \int_0^{L} f(x)\sin\frac{n\pi x}{L}\,dx.
+% \]
+
+% \subsection*{2.3 Where Do Jump Discontinuities Come From?}
+
+% After you form \(f_e\) or \(f_o\) on \([-L,L]\), you make it periodic.
+% Possible jumps occur at the points where periods meet:
+% \[
+% x = kL \quad (k\in\mathbb{Z}).
+% \]
+% To check for a jump at a point \(x_0\), compare the one-sided limits:
+% \[
+% \text{if }F(x_0^-)\neq F(x_0^+)\ \Rightarrow\ \text{jump at }x_0;
+% \quad\text{otherwise, no jump.}
+% \]
+% At a jump, the Fourier series converges to
+% \(\tfrac{1}{2}\big(F(x_0^-)+F(x_0^+)\big)\).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section*{3. Example: \(f(x)=1+3x\) on \([0,5]\) (\(L=5\))}
+
+% We consider the interval \([-L,L]=[-5,5]\) and period \(2L=10\).
+
+% \subsection*{3.1 Odd Extension (Sine Series)}
+
+% On \(0\le x\le 5\): \(f(x)=1+3x\).
+
+% On \(-5\le x<0\): define
+% \[
+% f_o(x) = -f(-x) = -\big(1+3(-x)\big) = -1+3x.
+% \]
+
+% Thus
+% \[
+% f_o(0^+) = f(0)=1,\qquad f_o(0^-) = -f(0)=-1,
+% \]
+% so there is a jump of size \(2\) at \(x=0\).
+% We then extend periodically with period \(10\), so the same jump
+% behavior occurs at \(x = 10k\) for all integers \(k\).
+
+% The Fourier sine series of \(f\) on \([0,5]\) approximates this
+% odd, piecewise linear, \(10\)-periodic function.
+
+% \subsection*{3.2 Even Extension (Cosine Series)}
+
+% On \(-5\le x<0\): define
+% \[
+% f_e(x) = f(-x) = 1+3(-x) = 1-3x.
+% \]
+
+% Here
+% \[
+% f_e(0^-)=f(0)=1=f_e(0^+),
+% \]
+% so no jump at \(x=0\). At \(x=\pm 5\) the left/right copies also match,
+% so \(f_e\) is continuous and even: \(f_e(x)=1+3|x|\) on \([-5,5]\),
+% extended periodically with period \(10\).
+
+% The Fourier cosine series of \(f\) on \([0,5]\) approximates this
+% even, piecewise linear, \(10\)-periodic function.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{4. Sturm--Liouville Summary (Key Properties)}
+
+Consider a regular Sturm--Liouville problem
+\[
+\frac{d}{dx}\big(p(x)y'(x)\big) + \big(\lambda\,w(x) - q(x)\big)y(x) = 0,
+\]
+on \([a,b]\), with \(p>0\), \(w>0\), and appropriate self-adjoint
+(separated) boundary conditions. Then:
+
+\begin{enumerate}
+  \item \textbf{Eigenvalues are real.}\\[1mm]
+  All eigenvalues \(\lambda_n\) are real numbers.
+
+  \item \textbf{Eigenvalues are discrete and ordered.}\\[1mm]
+  There is an infinite sequence
+  \[
+  \lambda_1 < \lambda_2 < \lambda_3 < \dots,\qquad
+  \lambda_n \to +\infty.
+  \]
+
+  \item \textbf{Orthogonality w.r.t. the weight.}\\[1mm]
+  If \(y_m,y_n\) correspond to different eigenvalues
+  \(\lambda_m\neq\lambda_n\), then
+  \[
+  \int_a^b w(x)\,y_m(x)\,y_n(x)\,dx = 0.
+  \]
+
+  \item \textbf{One-dimensional eigenspaces.}\\[1mm]
+  For each \(\lambda_n\), all eigenfunctions are multiples of a single
+  eigenfunction (no independent ``extra'' eigenfunctions for the same
+  eigenvalue under separated BCs).
+
+  \item \textbf{Zero (oscillation) count.}\\[1mm]
+  The \(n\)-th eigenfunction \(y_n\) has exactly \(n-1\) zeros in the
+  open interval \((a,b)\).
+\end{enumerate}
+
+(Additionally, in applications one often uses that the eigenfunctions
+\(\{y_n\}\) form a complete orthogonal set in \(L^2_w[a,b]\), so any
+sufficiently nice function can be expanded in a Fourier series of
+eigenfunctions.)
+
+
+\end{multicols}
+\end{document}

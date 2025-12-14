@@ -1,0 +1,237 @@
+\documentclass[9pt,landscape,twoside]{article}
+\usepackage[margin=0.45in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{multicol}
+\usepackage{physics}
+\setlength{\columnsep}{0.35in}
+\setlength{\parskip}{2pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\newcommand{\al}{\alpha}
+\newcommand{\lap}{\Delta}
+\newcommand{\dn}{\partial_{\!n}}
+
+\begin{document}
+\begin{multicols}{2}
+
+{\Large \textbf{Exam 1 Cheatsheet (Methods \& Templates)}}
+
+\section*{Conservation \& Physical Meaning}
+\textbf{Heat eq (1D rod)}: $u_t=\al u_{xx}$, $\al=K/(\rho c)$.\\
+\textbf{Flux}: $\phi=-K u_x$. \quad \textbf{Energy density}: $e=\rho c\,u$.\\
+\textbf{Integral conservation}: $\displaystyle \frac{d}{dt}\int_0^L u\,dx=\frac{1}{\rho c K}\int_0^L Q\,dx$.\\
+\textbf{Equilibrium}: $\lap u=0$. With \emph{pure Neumann}, steady state exists iff net flux $=0$; solution unique up to constant (fix mean or value at a point).\\
+\textbf{Divergence Thm} (2D/3D): $\iint_\Omega \nabla\!\cdot\!F\,dA=\int_{\partial\Omega}F\!\cdot n\,ds$,
+$\iiint_\Omega \nabla\!\cdot\!F\,dV=\iint_{\partial\Omega}F\!\cdot n\,dS$.
+
+\section*{Boundary Conditions (heat)}
+\textbf{Dirichlet}: fixed temperature $u=$ given. \quad
+\textbf{Neumann}: insulated/flux given, $u_x$ given.\\
+\textbf{Robin (Newton cooling)}: $-K u_x = h(u-u_\infty)$.\\
+\textbf{Periodic}: $u(0,t)=u(L,t)$, $u_x(0,t)=u_x(L,t)$.
+
+\section*{Orthogonality you \emph{don't} have on your sheet}
+\textbf{Half-integer cosine/sine} on $[0,H]$:
+\[
+\int_0^H\!\cos\!\frac{(n+\tfrac12)\pi y}{H}\cos\!\frac{(m+\tfrac12)\pi y}{H}\,dy
+=\frac{H}{2}\delta_{mn},
+\]
+\[
+\int_0^H\!\sin\!\frac{(n+\tfrac12)\pi y}{H}\sin\!\frac{(m+\tfrac12)\pi y}{H}\,dy
+=\frac{H}{2}\delta_{mn}.
+\]
+\textbf{Fourier coeffs for these bases}:
+\[
+C_n=\frac{2}{H}\int_0^H g(y)\cos\!\frac{(n+\tfrac12)\pi y}{H}\,dy,\quad
+S_n=\frac{2}{H}\int_0^H g(y)\sin\!\frac{(n+\tfrac12)\pi y}{H}\,dy.
+\]
+
+\section*{Heat Equation Templates (1D)}
+
+Domain $0<x<L$, $u_t=\al u_{xx}$.
+
+\vspace{0.5em}
+\textbf{D–N (Dirichlet at $x=0$, Neumann at $x=L$):}
+\[
+u(0,t)=0,\quad u_x(L,t)=0,\quad u(x,0)=f(x).
+\]
+Use eigenfunctions $\sin\!\frac{(n+\tfrac{1}{2})\pi x}{L}$.
+\[
+u(x,t)=\sum_{n=0}^\infty 
+b_n\,e^{-\al\big((n+\tfrac12)\pi/L\big)^2 t}
+\sin\!\frac{(n+\tfrac12)\pi x}{L},
+\]
+\[
+b_n=\frac{2}{L}\!\int_0^L\! f(x)\sin\!\frac{(n+\tfrac12)\pi x}{L}\,dx.
+\]
+{\small (Satisfies $u(0,t)=0$ since $\sin 0=0$ and $u_x(L,t)=0$ since $\cos((n+\tfrac12)\pi)=0$.)}
+
+\vspace{0.5em}
+\textbf{N–D (Neumann at $x=0$, Dirichlet at $x=L$):}
+\[
+u_x(0,t)=0,\quad u(L,t)=0,\quad u(x,0)=f(x).
+\]
+Use eigenfunctions $\cos\!\frac{(n+\tfrac{1}{2})\pi x}{L}$.
+\[
+u(x,t)=\sum_{n=0}^\infty 
+a_n\,e^{-\al\big((n+\tfrac12)\pi/L\big)^2 t}
+\cos\!\frac{(n+\tfrac12)\pi x}{L},
+\]
+\[
+a_n=\frac{2}{L}\!\int_0^L\! f(x)\cos\!\frac{(n+\tfrac12)\pi x}{L}\,dx.
+\]
+{\small (Satisfies $u_x(0,t)=0$ since $\sin 0=0$, and $u(L,t)=0$ since $\cos((n+\tfrac12)\pi)=0$.)}
+
+\vspace{0.5em}
+\textbf{Periodic (for reference):}
+\[
+u(0,t)=u(L,t),\quad u_x(0,t)=u_x(L,t),\quad 
+u(x,t)=A_0+\sum_{n\neq0}A_n e^{-\al (2\pi n/L)^2 t}e^{i2\pi n x/L}.
+\]
+Real form: $u(x,t)=a_0+\sum_{n\ge1}e^{-\al (2\pi n/L)^2 t}\big[a_n\cos(2\pi n x/L)+b_n\sin(2\pi n x/L)\big].$
+
+\section*{Laplace on Rectangles: Ready Forms}
+Let $\lap u=0$ on $0<x<L$, $0<y<H$.\\[3pt]
+\textbf{(D at $y=0,H$; $u(0,y)=g$, $u(L,y)=0$):}
+\[
+u=\sum_{n\ge1}\frac{G_n}{\sinh(\alpha_n L)}\sinh(\alpha_n(L-x))\sin(\alpha_n y),\ 
+\alpha_n=\tfrac{n\pi}{H},\
+G_n=\tfrac{2}{H}\!\int_0^H\! g\sin(\alpha_n y)\,dy.
+\]
+\textbf{(N at $y=0$; D at $y=H$; $u(0,y)=g$, $u(L,y)=0$):}
+\[
+u=\sum_{n\ge0}\frac{G_n}{\sinh(\alpha_n L)}\sinh(\alpha_n(L-x))\cos(\alpha_n y),\
+\alpha_n=\tfrac{(n+\tfrac12)\pi}{H}.
+\]
+\textbf{(N at $x=0,L$; N at $y=H$; $u(x,0)=F$):}
+\[
+u(x,y)=A_0+\sum_{n\ge1} A_n\cos\frac{n\pi x}{L}\,
+\frac{\cosh\!\big(\frac{n\pi}{L}(H-y)\big)}{\cosh\!\big(\frac{n\pi}{L}H\big)},
+\]
+$A_0=\frac{1}{L}\!\int_0^L F,\ \ A_n=\frac{2}{L}\!\int_0^L F\cos\frac{n\pi x}{L}\,dx.$\\
+\textbf{Trick}: write $\sinh(\alpha(L-x))$ or $\cosh(\alpha(L-x))$ to auto-satisfy a boundary at $x=L$ (Dirichlet or Neumann).
+
+\section*{Neumann Compatibility (use this!)}
+For steady Laplace with Neumann data: 
+\[
+\int_{\partial\Omega}\dn u\,ds=\iint_\Omega \lap u\,dA=0.
+\]
+Example: if $u_x(0,y)=u_x(L,y)=u_y(x,0)=0$ and $u_y(x,H)=f(x)$, then \emph{must have}
+$\displaystyle \int_0^L f(x)\,dx=0$. Unique up to additive constant.
+
+\section*{Polar Geometry: Practical Forms}
+\textbf{Exterior circle ($r\ge a$), finite at $\infty$, Dirichlet at $r=a$:}
+\[
+u(r,\theta)=A_0+\sum_{n\ge1}\left(\frac{a}{r}\right)^n
+\big(A_n\cos n\theta+B_n\sin n\theta\big),
+\]
+$A_0,A_n,B_n$ are the $2\pi$ Fourier coefficients of $u(a,\theta)$. If $u\to0$ at $\infty$, set $A_0=0$.\\[2pt]
+\textbf{Quarter-disk} ($0\le\theta\le \pi/2$) with $u_\theta(r,0)=0$, $u(r,\tfrac{\pi}{2})=0$, $u(1,\theta)=f(\theta)$:
+\[
+u(r,\theta)=\sum_{n=0}^\infty A_n\,r^{2n+1}\cos\!\big((2n+1)\theta\big),\qquad
+A_n=\frac{4}{\pi}\int_0^{\pi/2}\! f(\varphi)\cos\!\big((2n+1)\varphi\big)\,d\varphi.
+\]
+
+\section*{Fourier Tips You’ll Use}
+\textbf{Step on half-interval}: $F(x)=\mathbf 1_{[0,L/2)}(x)$ has cosine coeffs
+\[
+A_n=\frac{2}{n\pi}\sin\!\frac{n\pi}{2}\Rightarrow A_{2k}=0,\ 
+A_{2k+1}=\frac{2(-1)^k}{(2k+1)\pi}.
+\]
+\textbf{Even/odd extensions} (to use pure cos/sin on $[0,L]$):\\
+Even $\Rightarrow$ cosine series; Odd $\Rightarrow$ sine series.
+
+\section*{Divergence Theorem (2D/3D Full Forms)}
+
+\textbf{General 2D (Cartesian):}
+\[
+\boxed{
+\iint_{\Omega}\!\!\left(\frac{\partial F_x}{\partial x}+\frac{\partial F_y}{\partial y}\right)\! dA
+=
+\oint_{\partial\Omega} (F_x n_x + F_y n_y)\,ds
+=
+\oint_{\partial\Omega} \vb{F}\cdot\vb{n}\,ds
+}
+\]
+
+\textbf{Rectangular region } $\Omega=[0,L]\times[0,H]$:
+\[
+\iint_{\Omega}\!\!\left(\frac{\partial F_x}{\partial x}+\frac{\partial F_y}{\partial y}\right)dA
+=
+\int_{0}^{H}\!\!\big[F_x(L,y)-F_x(0,y)\big]\,dy
++
+\int_{0}^{L}\!\!\big[F_y(x,H)-F_y(x,0)\big]\,dx.
+\]
+{\small For heat flux $\vb{F}=-K\nabla u$, this equals total outward heat flow through all 4 sides.}
+
+\textbf{Polar coordinates } $(r,\theta)$:
+If $\vb{F}=F_r\,\vb{e}_r + F_\theta\,\vb{e}_\theta$,
+\[
+\boxed{
+\iint_{\Omega}
+\!\!\left[
+\frac{1}{r}\frac{\partial}{\partial r}(rF_r)
++\frac{1}{r}\frac{\partial F_\theta}{\partial \theta}
+\right] r\,dr\,d\theta
+=
+\oint_{\partial\Omega}\vb{F}\cdot\vb{n}\,ds
+}
+\]
+For a circular region $r=a$:
+\[
+\iint_{\Omega}
+\!\!\left[
+\frac{1}{r}\frac{\partial}{\partial r}(rF_r)
++\frac{1}{r}\frac{\partial F_\theta}{\partial \theta}
+\right] r\,dr\,d\theta
+=
+\int_0^{2\pi}\! F_r(a,\theta)\,a\,d\theta.
+\]
+{\small For $\vb{F}=-K\nabla u$, this gives total heat leaving the circle of radius $a$.}
+
+\textbf{3D version (for reference):}
+\[
+\iiint_{\Omega}(\frac{\partial F_x}{\partial x}+\frac{\partial F_y}{\partial y}+\frac{\partial F_z}{\partial z})\,dV
+=
+\iint_{\partial\Omega}(F_x n_x+F_y n_y+F_z n_z)\,dS.
+\]
+
+
+\section*{Proof Tools (one-liners)}
+\textbf{Dirichlet uniqueness} for $\lap u=g$: difference is harmonic $\Rightarrow$ max principle $\Rightarrow$ zero.\\
+\textbf{Mean value property}: harmonic $u(x_0)$ equals average of $u$ on any circle/sphere centered at $x_0$ inside domain (quick sanity check).\\
+\textbf{Strong max principle}: interior max/min $\Rightarrow$ $u$ constant.
+
+% \section*{Common Pitfalls (and fixes)}
+% \begin{itemize}
+% \item Forgot constant mode for Neumann (heat \& Laplace): include $n=0$ cosine.
+% \item Mixed BC indices are half-integers $(n+\tfrac12)$; orthogonality weight is $H/2$.
+% \item Signs: $\cosh$ even, $\sinh$ odd; derivative at endpoint often introduces a minus.
+% \item Use $L-x$ inside $\sinh/\cosh$ to kill conditions at $x=L$ (\(u(L,\cdot)=0\) or \(u_x(L,\cdot)=0\)).
+% \item Exterior disk: drop $r^n$ and $\ln r$ to keep $u$ finite at $\infty$.
+% \end{itemize}
+
+\section*{Checklists}
+% \textbf{Rectangular Laplace}:
+% \begin{itemize}
+%     \item Pick $y$-eigenbasis from $y$-BCs.
+%     \item Solve $X''-\lambda X=0$; shape with $\sinh/\cosh$ to satisfy $x$-BCs.
+%     \item Expand boundary data using correct orthogonality (watch $H/2$ vs $H$).
+%     \item Enforce compatibility for Neumann.
+% \end{itemize}
+\textbf{1D Heat}:
+\begin{itemize}
+    \item Choose sin/cos basis.
+    \item Compute Fourier coeffs of $u(x,0)$.
+    \item Multiply by $e^{-\al\lambda_n t}$.
+    \item Add constant mode (Neumann).
+\end{itemize}
+\textbf{Polar}:
+\begin{itemize}
+    \item Periodicity $\Rightarrow$ angular $\cos n\theta,\sin n\theta$.
+    \item Radial Euler $\Rightarrow$ keep $r^n$ (interior) or $r^{-n}$ (exterior).
+    \item Coeffs are Fourier coeffs of boundary data.
+\end{itemize}
+\end{multicols}
+\end{document}

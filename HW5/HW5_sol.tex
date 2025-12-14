@@ -1,0 +1,489 @@
+\documentclass[]{article}
+
+\usepackage{fullpage, amssymb, amsmath, mathrsfs, graphicx,setspace,bm}
+
+
+
+\begin{document}
+\begin{flushright} Oreofe Solarin \end{flushright}
+\noindent MATH 345 Homework 5 Solutions  \\
+
+\noindent \textbf{Question 1}
+
+In SL-form:
+\[
+- \frac{d}{dx} \Bigl[(1+x^2)\phi'(x) \Bigr] = \lambda\phi(x) 
+\]
+
+and we have \(\phi(0) = 0\) and \(\phi(1) = 0\)
+
+
+\noindent The Rayleigh quotient for a given \(u\) is:
+\[
+R[u] = \frac{\displaystyle\int_{0}^{1}p(x)[u'(x)]^2dx}{\displaystyle\int_{0}^{1}[u(x)]^2dx} = \frac{\displaystyle\int_{0}^{1}(1+x^2)[u'(x)]^2dx}{\displaystyle\int_{0}^{1}u(x)^2dx}
+\]
+
+\noindent for such \(u\) that satisfies the boundary conditions, we have \(\lambda_1 \leq R[u]\) \\
+
+\noindent For our test function \(u_T(x)\), the first eigenfunction should be positive on \((0,1)\), satisfy \(\phi(0)=0, \phi(1)=0\) and have \(0\) derivative at \(x=0\) \\
+
+\noindent since \(u_T(0) =0,\, u'_T(0) =1-0=1,\, u_T(1)=0\)
+
+
+\[
+u_T(x) = x(1-x)
+\]
+
+\[
+[u_T(x)]^2 = [x(1-x)]^2 = x^2(1-x)^2 = x^2(1-2x+x^2) = x^2-2x^3+x^4
+\]
+
+
+\[
+u'_T(x) = x\cdot-1 + (1-x)\cdot 1 = 1-2x
+\]
+
+\[
+[u'_T(x)]^2 = [1-2x]^2 = 1 -2x-2x+4x^2 = 1-4x+4x^2
+\]
+
+Numerator: 
+
+\begin{align*}
+N &= \displaystyle\int_{0}^{1}(1+x^2)[u'_T(x)]^2 dx = \displaystyle\int_{0}^{1} (1+x^2)(1-4x+4x^2)dx \\
+    &= \displaystyle\int_{0}^{1} 1-4x+4x^2+x^2-4x^3+4x^4dx = \displaystyle\int_{0}^{1} 1-4x+5x^2-4x^3+4x^4dx \\
+    &= \Big[x-2x^2+\frac{5}{3}x^3-x^4+\frac{4}{5}x^5\Big]_{0}^{1} \\
+    &= 1-2+\frac{5}{3}-1+\frac{4}{5}=\frac{7}{15}
+\end{align*}
+
+% \noindent using \(\displaystyle\int_{0}^{1}x^n dx = \frac{1}{n+1}\) \\
+
+% \noindent we have:
+% \[
+% N = 4 \Bigl(\frac{1}{3}+ \frac{1}{5}\Bigr) = 4 \cdot \frac{8}{15} = \frac{32}{15}
+% \]
+
+Denominator: 
+\begin{align*}
+    D &= \displaystyle\int_{0}^{1} u_T(x)^2dx = \displaystyle\int_{0}^{1}x^2-2x^3+x^4dx \\
+    &= \Big[\frac{1}{3}x^3-\frac{1}{2}x^4+\frac{1}{5}x^5\Big]^{1}_{0} = \frac{1}{3} - \frac{1}{2} + \frac{1}{5} = \frac{1}{30}
+    % &= 1 - 2 \cdot \frac{1}{3} + \frac{1}{5} = 1 - \frac{2}{3} + \frac{1}{5} = \frac{8}{15}
+\end{align*}
+
+\noindent Our Rayleigh Q: 
+\[
+R[u_T] = \frac{N}{D} = \frac{7/15}{1/30} = 14
+\]
+
+\noindent So reasonable upper bound for the smallest eigenvalue is \(\boxed{\lambda_1 \leq 14}\) If we use higher order terms in our \(u_T\) function we can get more accurate estitmates
+
+\pagebreak
+
+\noindent \textbf{Question 2}
+
+We have: 
+\[
+\frac{d}{dx}\Bigl(p(x)\frac{d\phi}{dx}\Bigr) + [\lambda\sigma(x) +q(x)]\phi = 0
+\]
+
+\noindent with BCs \(\frac{d\phi}{dx}(0) = 0\) and \(\frac{d\phi}{dx}(L) = 0\)\\ 
+
+\noindent for \(\lambda \gg 1\), \(\lambda\sigma(x)\) dominates so we can drop \(q(x)\). and we now have \((p\phi')' + \lambda\sigma\phi  \approx 0\)
+
+
+\[
+\frac{\phi''p}{p}  + \frac{p'\phi}{p}  + \frac{\lambda\sigma\phi}{p} \approx 0
+\]
+\[
+\phi''  +  \frac{p'\phi}{p} + \frac{\lambda\sigma\phi}{p}  \approx 0
+\]
+
+\noindent using ansatz:
+\[
+\phi(x) = A(x)\cos{\theta(x)}
+\]
+
+\[
+\phi' = A'\cos{\theta(x)} - A\theta'\sin{\theta(x)}
+\]
+
+\[
+\phi'' = (A''-A(\theta')^2)\cos\theta -(2A'\theta' + A\theta'')\sin\theta
+\]
+
+\[
+(A''-A(\theta')^2)\cos\theta
+-(2A'\theta' + A\theta'')\sin\theta
++\frac{\lambda\sigma}{p}A\cos\theta \approx 0
+\]
+
+\noindent cos coefficient:
+\[
+  A\Big(-(\theta')^2 + \lambda\frac{\sigma}{p}\Big) + A''.
+\]
+\noindent sin coefficient:
+\[
+  -(2A'\theta' + A\theta'')
+\]
+
+\noindent For large \(\lambda\), the terms \(A(\theta')^2\) and \(\lambda\frac{\sigma}{p}A\) are \(O(\lambda)\), while \(A''\) is \(O(1)\); thus we can drop \(A''\) at leading order:
+
+\[
+-(\theta')^2 + \lambda\frac{\sigma(x)}{p(x)}\approx0
+\quad\Rightarrow\quad
+(\theta')^2 \approx \lambda\frac{\sigma(x)}{p(x)}
+\]
+
+\[
+\theta'(x)\approx \sqrt{\lambda}\sqrt{\frac{\sigma(x)}{p(x)}}.
+\]
+
+\[
+\theta(x)\approx \sqrt{\lambda}\int_0^x\sqrt{\frac{\sigma(s)}{p(s)}}ds + C
+\]
+
+\[
+\phi(x)\approx A(x)\cos\Big(\sqrt{\lambda}\int_0^x\sqrt{\frac{\sigma}{p}}ds + C\Big)
+\]
+
+\noindent using the Neumann boundary conditions \\
+
+\noindent we have \(\phi'(0)=\phi'(L)=0\)
+
+\[
+\phi'(x) \approx -A\theta'(x)\sin\theta(x)
+\]
+
+\noindent so \\
+
+\noindent at \(x=0\):
+
+\[
+  \phi'(0)\approx -A\theta'(0)\sin\theta(0)=0
+  \quad\Rightarrow\quad \sin\theta(0)\approx0.
+\]
+
+\noindent we can take \(\theta(0)=0\) (so \(\delta=0)\)
+
+\noindent at \(x=L\):
+
+\[
+  \phi'(L)\approx -A\theta'(L)\sin\theta(L)=0
+  \quad\Rightarrow\quad \sin\theta(L)\approx0
+  \quad\Rightarrow\quad \theta(L)\approx n\pi,\ n=0,1,2,\dots
+\]
+
+\noindent but
+
+\[
+\theta(L) \approx \sqrt{\lambda}\int_0^L\sqrt{\frac{\sigma(s)}{p(s)}}ds
+=\sqrt{\lambda}J.
+\]
+
+\noindent so the quantization condition is:
+\[\sqrt{\lambda_n}\,J \approx n\pi
+\quad\Rightarrow\quad
+\boxed{\lambda_n \approx \frac{n^2\pi^2}{J^2}},\qquad
+J=\int_0^L\sqrt{\frac{\sigma(x)}{p(x)}}\,dx
+\]
+
+\noindent and the corresponding eigenfunctions (to leading order) are
+
+\[
+\boxed{\phi_n(x)\approx A\cos\left(
+\frac{n\pi}{J}\int_0^x\sqrt{\frac{\sigma(s)}{p(s)}}ds
+\right)}
+\]
+
+\pagebreak
+
+\noindent \textbf{Question 3}
+
+
+
+\noindent WWS, for continuous \(f:[0,\pi]\to\mathbb{R}\) (or even \(\mathbb{C}\)),
+
+\[
+\sum_{k=1}^{n} \left|\int_{0}^{\pi} f(x)\sin(kx)\,dx\right|^{2}
+\le \frac{\pi}{2}\int_{0}^{\pi}|f(x)|^{2}\,dx 
+\]
+
+
+
+\noindent using orthogonality of the sin
+
+\noindent the inner product:
+\[
+\langle g,h\rangle = \int_{0}^{\pi} g(x)\overline{h(x)}\,dx.
+\]
+
+\noindent For \(s_k(x)=\sin(kx)\) we have
+
+\noindent For \(k\ne m\):
+  \[
+  \int_0^\pi \sin(kx)\sin(mx)\,dx=0,
+  \]
+\noindent For \(k=m\):
+  \[
+  \int_0^\pi \sin^2(kx)\,dx=\frac{\pi}{2}
+  \]
+
+\noindent So \({s_1,\dots,s_n}\) is an orthogonal set and
+\[
+|s_k|^{2}=\langle s_k,s_k\rangle=\frac{\pi}{2}
+\]
+
+\noindent For any constants \(c_1,\dots,c_n\) we consider
+\[
+g(x)=\sum_{k=1}^{n} c_k s_k(x)
+\]
+
+
+\noindent and since \(|f-g|^{2}\ge0\),
+\[
+0\le |f-g|^{2}
+= |f|^{2} - 2\Re\sum_{k=1}^{n} c_k \langle f,s_k\rangle
++\sum_{k=1}^{n} |c_k|^{2} |s_k|^{2}
+\]
+
+\noindent using \(|s_k|^{2}=\pi/2\), this is
+\[
+0\le
+|f|^{2} - 2\Re\sum_{k=1}^{n} c_k \langle f,s_k\rangle
++ \frac{\pi}{2}\sum_{k=1}^{n}|c_k|^{2} \tag{*}
+\]
+
+\noindent we choose
+\[
+c_k = \frac{2}{\pi}\langle f,s_k\rangle
+= \frac{2}{\pi}\int_{0}^{\pi} f(x)\sin(kx)\,dx
+\]
+
+\noindent Plug into (*):
+
+\noindent Middle term:
+\[
+-2\Re\sum c_k\langle f,s_k\rangle
+= -2\sum \frac{2}{\pi}|\langle f,s_k\rangle|^{2}
+= -\frac{4}{\pi}\sum_{k=1}^{n}|\langle f,s_k\rangle|^{2}
+\]
+
+\noindent Last term:
+\[
+\frac{\pi}{2}\sum |c_k|^{2}
+=\frac{\pi}{2}\sum \left(\frac{2}{\pi}\right)^{2}|\langle f,s_k\rangle|^{2}
+=\frac{2}{\pi}\sum_{k=1}^{n}|\langle f,s_k\rangle|^{2}
+\]
+
+\noindent so
+\[
+0\le |f|^{2}
+-\frac{4}{\pi}\sum|\langle f,s_k\rangle|^{2}
++\frac{2}{\pi}\sum|\langle f,s_k\rangle|^{2}
+= |f|^{2}
+-\frac{2}{\pi}\sum_{k=1}^{n}|\langle f,s_k\rangle|^{2}
+\]
+
+\noindent rearranging:
+\[
+\sum_{k=1}^{n} |\langle f,s_k\rangle|^{2}
+\le \frac{\pi}{2}|f|^{2}
+\]
+
+Finally, \(\langle f,s_k\rangle = \displaystyle\int_0^\pi f(x)\sin(kx)\,dx\) and
+\(|f|^{2} = \displaystyle\int_0^\pi |f(x)|^{2}dx\), so this is exactly
+
+\[
+\boxed{
+\sum_{k=1}^{n}\left|\int_{0}^{\pi} f(x)\sin(kx)\,dx\right|^{2}
+\le \frac{\pi}{2}\int_{0}^{\pi}|f(x)|^{2}\,dx
+}
+\]
+
+\pagebreak
+
+\noindent \textbf{Question 4}
+\[
+\frac{\partial u}{\partial t}=k_1\frac{\partial^2u}{\partial x^2}
++k_2\frac{\partial^2u}{\partial y^2},\qquad
+0<x<L;0<y<H,
+\]
+\noindent with
+\(u(0,y,t)=u(L,y,t)=0\) (Dirichlet in (x)),\\
+\(u_y(x,0,t)=u_y(x,H,t)=0\) (Neumann in (y)),\\
+and \(u(x,y,0)=\alpha(x,y)\) \\
+
+\noindent SoV:
+\[
+u(x,y,t)=X(x)Y(y)T(t)
+\]
+\[
+X Y T' = k_1 X'' Y T + k_2 X Y'' T
+\]
+\[
+\frac{T'}{T}=k_1\frac{X''}{X}+k_2\frac{Y''}{Y}
+\]
+\[
+\frac{T'}{T}=-\lambda,\qquad k_1\frac{X''}{X}+k_2\frac{Y''}{Y}=-\lambda.
+\]
+\[
+k_1\frac{X''}{X}+k_2\frac{Y''}{Y}=-\lambda
+\quad\Rightarrow\quad
+\frac{X''}{X}+\frac{k_2}{k_1}\frac{Y''}{Y}=-\frac{\lambda}{k_1}.
+\]
+\noindent separating again with another constant \(-\mu\):
+\[
+\frac{X''}{X}=-\mu,\qquad \frac{k_2}{k_1}\frac{Y''}{Y}=-(\tfrac{\lambda}{k_1}-\mu)
+\]
+
+\noindent ODEs:
+\[
+X''+\mu X=0,\qquad
+Y''+\nu Y=0,\qquad
+T'+\lambda T=0,
+\]
+
+\noindent where: \(\nu =\frac{k_1}{k_2}\left(\frac{\lambda}{k_1}-\mu\right)\) \\
+
+\noindent For x: \(X''+\mu X=0,\ X(0)=X(L)=0\)
+\[
+\mu_n=\left(\frac{n\pi}{L}\right)^2,\qquad
+X_n(x)=\sin\frac{n\pi x}{L},\qquad n=1,2,\dots
+\]
+
+\noindent For y: \(Y''+\nu Y=0,\ Y'(0)=Y'(H)=0\) \\
+
+\noindent We have a neumann eigenproblem:
+\[
+\nu_m=\left(\frac{m\pi}{H}\right)^2,\qquad
+Y_m(y)=\cos\frac{m\pi y}{H},\qquad m=0,1,2,\dots
+\]
+
+
+\noindent For each pair ((n,m)),
+
+\[
+\lambda_{nm}=k_1\mu_n+k_2\nu_m
+= k_1\Big(\frac{n\pi}{L}\Big)^2+k_2\Big(\frac{m\pi}{H}\Big)^2
+\]
+
+\[
+T_{nm}(t)=e^{-\lambda_{nm}t}
+\]
+
+\[
+u(x,y,t)=\sum_{n=1}^{\infty}\sum_{m=0}^{\infty}
+A_{nm}\times e^{-\left(k_1(n\pi/L)^2+k_2(m\pi/H)^2\right)t}
+\sin\frac{n\pi x}{L}\times\cos\frac{m\pi y}{H}
+\]
+
+\noindent At \(t=0\),
+
+\[
+\alpha(x,y)=u(x,y,0)
+=\sum_{n=1}^{\infty}\sum_{m=0}^{\infty}
+A_{nm}\sin\frac{n\pi x}{L}\cos\frac{m\pi y}{H}
+\]
+
+\noindent so \(\alpha\) is expanded in the mixed sin-cos part
+
+\noindent using orthogonality:
+
+\(\displaystyle\int_0^L \sin\frac{n\pi x}{L}\sin\frac{p\pi x}{L}dx
+  =\frac{L}{2}\delta_{np}\),
+\(\displaystyle\int_0^H \cos\frac{m\pi y}{H}\cos\frac{q\pi y}{H}dy
+  =\begin{cases}
+  H, & m=q=0,\\[2pt]
+  \frac{H}{2}\delta_{mq}, & m,q\ge1.
+  \end{cases}\)
+
+\noindent we get \\
+
+\noindent for \(m\ge1\):
+\[
+  A_{nm}
+  =\frac{4}{LH}\int_0^L\int_0^H
+  \alpha(x,y)\sin\frac{n\pi x}{L}\cos\frac{m\pi y}{H}dydx;
+\]
+
+\noindent for \(m=0\):
+\[
+  A_{n0}
+  =\frac{2}{LH}\int_0^L\int_0^H
+  \alpha(x,y)\sin\frac{n\pi x}{L}dydx.
+\]
+
+\[
+\boxed{
+u(x,y,t)=\sum_{n=1}^{\infty}\sum_{m=0}^{\infty}
+A_{nm}e^{-\left(k_1\left(\frac{n\pi}{L}\right)^2
++k_2\left(\frac{m\pi}{H}\right)^2\right)t}
+\sin\frac{n\pi x}{L}\cos\frac{m\pi y}{H}
+}
+\]
+
+\noindent with \(A_{nm}\) determined from \(\alpha(x,y)\) by the formulas above
+
+
+\pagebreak
+
+\textbf{Question 5}
+\[
+c(x,y,z)\rho(x,y,z) \frac{\partial u}{dt} =  \nabla \cdot (K_0 (x,y,z) \nabla u)
+\]
+% \[
+% c(x,y,z)p(x,y,z) \frac{\partial u}{dt} =  \nabla \cdot (K_0 (x,y,z) (\frac{\partial u}{\partial x} + \frac{\partial u}{\partial y}+\frac{\partial  u }{\partial z}))
+% \]
+% \[
+% cp \frac{\partial u }{dt} = \Delta u\cdot K_0
+% \]
+% \[
+% cp \frac{\partial u }{dt} = k(\frac{\partial^2u}{\partial x} + \frac{\partial^2u}{\partial y}+\frac{\partial^2 u }{\partial z})
+% \]
+
+\[
+u(x,y,z,t) = \phi(x,y,z)h(t)
+\]
+\[
+\phi h' = \frac{1}{c\rho} (\nabla \cdot (K_0(h(t)\nabla\phi))) = \frac{h}{c\rho} \nabla \cdot (K_0\nabla\phi)
+\]
+\noindent since \(K_0\) depends only on space (last part)
+
+\[
+\frac{h'}{h} = \frac{1}{c\rho\phi}\nabla\cdot(K_o\nabla\phi)
+\]
+\noindent equate to \(-\lambda\)
+\[
+\frac{h'}{h} = \frac{1}{c\rho\phi}\nabla\cdot(K_o\nabla\phi) = -\lambda
+\]
+\[
+\frac{h'}{h} = -\lambda \qquad \frac{1}{c\rho\phi}\nabla\cdot(K_o\nabla\phi) = -\lambda
+\]
+\noindent from the first \(h\): 
+\[
+h(t) = Ce^{-\lambda t}
+\]
+
+\[
+\nabla\cdot(K_0\nabla\phi) = -\lambda c\rho\phi \iff \nabla\cdot(K_0\nabla\phi) + \lambda c\rho\phi = 0
+\]
+
+\noindent because we have \(u=0\) at the bds for all \(t\) and \(u=\phi h\), we must have \(\phi=0\) on the region \(\partial\Omega\) \\
+
+
+\noindent we just found the eigenvalue eq.: 
+\[
+\nabla\cdot(K_0\nabla\phi) + \lambda c\rho\phi = 0
+\]
+
+\noindent and it matches expected
+\[
+\nabla\cdot(p\nabla\phi) + \lambda\sigma(x,y,z)\phi = 0
+\]
+
+\boxed{
+    p(x,y,z) = K_0(x,y,z) \qquad \sigma(x,y,z) = c(x,y,z)\rho(x,y,z)
+}
+
+
+\end{document}
